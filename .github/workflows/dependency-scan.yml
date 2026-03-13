@@ -1,7 +1,7 @@
 name: Dependency Scan
 
 on: 
-    workflow-call:
+    workflow_call:
 
 jobs:
     dependancy-scan:

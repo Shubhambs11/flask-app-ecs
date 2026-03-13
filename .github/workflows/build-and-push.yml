@@ -1,7 +1,7 @@
 name: Build and Push to Docker Hub
 
 on: 
-  workflow_dispatch: 
+  workflow_call: 
 
 jobs:
   build-and-push:
