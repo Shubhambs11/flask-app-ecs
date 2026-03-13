@@ -1,0 +1,31 @@
+name: DevSecOps End to End pipeline
+
+on: 
+    push:
+        branches: [main]
+
+jobs:
+    code-quality:
+        uses: ./.github/workflows/code-check.yml
+        
+    secrets-scan:
+        uses: ./.github/workflows/secrets-scan.yml
+
+    dependency-scan:
+        uses: ./.github/workflows/dependency-scan.yml
+    
+    docker-scan:
+        uses: ./.github/workflows/docker-lint.yml
+
+    image-build:
+        needs: [ code-quality, secrets-scan, dependency-scan, docker-scan ]
+        uses: ./.github/workflows/build-and-push.yml
+        secrets: inherit
+    
+    image-scan:
+        needs: [ image-build ]
+        uses: ./.github/workflows/image-scan.yml
+        secrets: inherit
+
+    
+    
