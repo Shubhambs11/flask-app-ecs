@@ -5,7 +5,7 @@ on:
         branches: [main]
 
 jobs:
-    code-quality:
+    code-check:
         uses: ./.github/workflows/code-check.yml
         
     secrets-scan:
@@ -26,6 +26,9 @@ jobs:
         needs: [ image-build ]
         uses: ./.github/workflows/image-scan.yml
         secrets: inherit
-
     
+    deploy:
+        needs: [image-scan]
+        uses: ./.github/workflows/deploy-to-server.yml
+        secrets: inherit
     
