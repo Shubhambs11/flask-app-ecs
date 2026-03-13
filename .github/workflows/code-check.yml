@@ -1,11 +1,11 @@
-name: Code Scan
+name: Code Scanning
 
 on: 
   push:
-    branches: [main]
+    branches: [main]  # Trigger on push to the main branch
 
 jobs:
-  linter:
+  analyze:
     # server
     runs-on: ubuntu-latest
     strategy:
@@ -14,8 +14,8 @@ jobs:
 
     steps:
       # get the latest code in that server
-      - name: Checkout code
-        uses: actions/checkout@v5
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: setup python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
