@@ -5,13 +5,21 @@ on:
 
 jobs:
   deploy:
+    env:
+       username: ${{ vars.DOCKERHUB_USERNAME }}
+
     runs-on: self-hosted
     steps:
       - name: Code Checkout
         uses: actions/checkout@v4
-        
-      - name: Install Dependencies
-        run: sudo apt-get update && sudo apt-get install docker.io -y
 
-      - name: Run Docker image
-        run: echo "Docker running"
+      - name: Set up Docker Compose
+        uses: docker/setup-compose-action@v2
+          with:
+            version: 'latest'
+
+      - name: deploy with docker compose
+        run:  |
+              docker compose down --rmi all
+              docker compose build --no-cache
+              docker compose up -d
