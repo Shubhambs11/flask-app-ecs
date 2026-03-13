@@ -29,7 +29,7 @@ jobs:
                 username: ${{ secrets.EC2_SSH_USERNAME }}
                 key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
                 source: docker-compose.yml
-                target: ~/flask-
+                target: ~/flask-app
                     
             - name: SSH to Prod server & run the app
               uses: appleboy/ssh-action@v1.0.3
@@ -44,4 +44,4 @@ jobs:
                        export DOCKER_TAG=${{ github.sha }}
                        echo ${{ github.sha }}
                        echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-                       cd ~/devops && docker compose down && docker compose up -d --build --force-recreate --pull always
+                       cd ~/flask-app && docker compose down && docker compose up -d --build --force-recreate --pull always
