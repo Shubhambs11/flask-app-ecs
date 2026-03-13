@@ -6,6 +6,6 @@ COPY . .
 
 EXPOSE 80
 
-RUN pip install -r --no-cache-dir requirements.txt
+RUN pip install -r requirements.txt --no-cache-dir 
 
 CMD ["python", "run.py"]
