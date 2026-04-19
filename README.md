@@ -105,5 +105,3 @@ High-level steps to deploy this app on ECS:
 
 4. **Configure ALB** — target group pointing to port 80, use `/health` as the health check path
 
-img src="[Uploading image.png…]()" width="400" alt="Github Workflow">
-
